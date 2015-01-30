@@ -9,3 +9,6 @@ Add the sqlite plugin to ensure that we can access the database from the javascr
 Note: This project was created using the following cordova command
     $ ionic start E-Mission blank
 
+In order to have this project work correctly on android, you need to have a
+recent version of the old ant-based SDK build tools available. The easiest way
+to do this is to use the SDK manager to install the most recent build tools.
