@@ -1,21 +1,15 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ionic'])
 
-/*.controller('TripsCtrl', function($scope, Trips) {
-  $scope.trips = Trips.all();
-})
+.controller("TripsCtrl", function($scope, $ionicPlatform) {
+    console.log("controller TripsCtrl called");
 
-.controller('TripDetailCtrl', function($scope, $stateParams, Trips) {
-  $scope.trip = Trips.get($stateParams.tripId);
-})*/
-
-.controller("NamesCtrl", function($scope) {
     //DATA: Gautham, this is where you link the data.
-    $scope.names = [
-        {mode:'walking',confidence:1},
-        {mode:'car',confidence:0.5},
-        {mode:'walking',confidence:1},
-        {mode:'cycling',confidence:0.3},
-        {predictedMode:'cycling',confidence:0.3}
+    $scope.trips = [
+         {mode:'walking',confidence:1},
+         {mode:'car',confidence:0.5},
+         {mode:'walking',confidence:1},
+         {mode:'cycling',confidence:0.3},
+         {predictedMode:'cycling',confidence:0.3}
     ];
 
     $scope.pickImage = function(item){
@@ -25,24 +19,18 @@ angular.module('starter.controllers', [])
             var item_mode = item.mode;
         }
 
-        if (item_mode == 'walking') {
-            item.img = '../img/walking.svg';
-            return 'walking.jpg';
-        } if (item_mode == 'car') {
-            item.img = '../img/car.svg';
-            return 'car.jpg';
-        } if (item_mode == 'cycling') {
-            item.img = '../img/cycling.svg';
-            return 'cycling.jpg';
+    	if (item_mode == 'walking') {
+    		return 'img/walking.jpg';
+    	} if (item_mode == 'car') {
+    		return 'img/car.jpg';
+    	} if (item_mode == 'cycling') {
+            return 'img/cycling.jpg';
         } if (item_mode == 'air') {
-            item.img = '../img/air.svg';
-            return 'air.jpg';
+            return 'img/air.jpg';
         } if (item_mode == 'bus') {
-            item.img = '../img/bus.svg';
-            return 'bus.jpg';
+            return 'img/bus.jpg';
         } if (item_mode == 'train') {
-            item.img = '../img/train.svg';
-            return 'train.jpg';
+            return 'img/train.jpg';
         }
     };
 
@@ -59,21 +47,34 @@ angular.module('starter.controllers', [])
     };
 
     // I don't think anything after this line is getting executed. Why is that?
-    tripSectionDbHelper.getJSON({name: "TripSections.db"}, function(jsonTripList){
-        alert("this is actually happening");
-        console.log("testing other things");
-        $scope.names = tripSectionDbHelper.getUncommittedSections(jsonTripList);
-        console.log("trips have been loaded");
-    });
-
-    alert("this is actually happening");
-    // $scope.tripList = dbHelper.getUncommittedSections();
+    $ionicPlatform.ready(function() {
+        /*
+        var db = $cordovaSQLite.openDB({name: "TripSections.db"});
+        var query = "SELECT Count(id) AS count FROM currTrips";
+        $cordovaSQLite.execute(db, query).then function(result) {
+            if (result.rows.item(0).count > 0) {
+                alert("database has "+result.rows.item(0)+" rows");
+            } else {
+                alert("0 rows");
+            }
+        }
+        tripSectionDbHelper.getJSON({name: "TripSections.db"}, function(jsonTripList){
+            alert("this is actually happening");
+            console.log("testing other things");
+            $scope.trips = tripSectionDbHelper.getUncommittedSections(jsonTripList);
+            console.log($scope.trips.length + "trips have been loaded");
+        });
+        */
+    })
 })
 
-.controller('ListCtrl', function($scope) {
-  $scope.id = "10001";
-  $scope.message = "This works!"
-  $scope.cool = function() {
-    $scope.message = "I've been clicked!"
-  };
-});
+.controller('PlaylistsCtrl', function($scope) {
+  $scope.playlists = [
+    { title: 'Reggae', id: 1 },
+    { title: 'Chill', id: 2 },
+    { title: 'Dubstep', id: 3 },
+    { title: 'Indie', id: 4 },
+    { title: 'Rap', id: 5 },
+    { title: 'Cowbell', id: 6 }
+  ];
+})

@@ -11,31 +11,32 @@
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
-
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+    <script src="js/ng-cordova.min.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
+    <script type="text/javascript" src="listview-js/dbHelper.js"></script>
     <script src="listview-js/app.js"></script>
     <script src="listview-js/controllers.js"></script>
   </head>
 
   <body ng-app="starter" animation="slide-left-right-ios7">
-    <ion-list ng-controller="NamesCtrl" can-swipe="listCanSwipe">
-        <ion-item ng-repeat="x in names" class="item-thumbnail-right">
-            <div class="item item-divider">
-            <div class="color-box" style="background-color: #FF850A;"></div>
-            <h2>{{x.mode}}</h2>
-            <img src={{pickImage(x)}} height="42" width="42" align="center" margin-left="500px">
-            <span class="item-note" style={{pickColor(x)}}>
-                {{x.confidence}}
-            </span>
-            <div class="color-box" style="background-color: #FF850A;"></div>
-            </div>
-        </ion-item>
-    <ion-list>
+    <ion-list ng-controller="TripsCtrl" can-swipe="listCanSwipe">
+      <ion-item ng-repeat="x in trips" class="item-thumbnail-right  ">
+        <div class="item item-divider">
+        <div class="color-box" style="background-color: #FF850A;"></div>
+        <h2>{{x.mode}}</h2>
+        <img src={{pickImage(x)}} height="42" width="42" align="center" margin-left="500px">
+        <span class="item-note" style={{pickColor(x)}}>
+          {{x.confidence}}
+        </span>
+        <div class="color-box" style="background-color: #FF850A;"></div>
+        </div>
+      </ion-item>
+    </ion-list>
   </body>
 </html>

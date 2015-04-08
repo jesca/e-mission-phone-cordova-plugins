@@ -36,12 +36,15 @@ var app = {
         app.receivedEvent('deviceready');
         console.log("onDeviceReady");
         console.log(window);
+        /*
         var tripList = dbHelper.getUncommittedSections();
 	for trip in tripList{
 	     alert("Here is one trip in the database: " + trip.toString());
-	}
+	    }
+        */
     },
     // Update DOM on a Received Event
+    /*
     receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
@@ -52,6 +55,7 @@ var app = {
 
         console.log('Received Event: ' + id);
     }
+    */
 };
 
 app.initialize();
