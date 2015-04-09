@@ -131,7 +131,8 @@ var dbHelperTests = {
 
             var realDbQueryDone = assert.async();
             console.log("Opening database");
-            tripSectionDbHelper.getJSON({name: "TripSections.db"}, function(jsonTripList) {
+            var db = window.sqlitePlugin.openDatabase({name: "TripSections.db", location: 2, createFromLocation: 1});
+            tripSectionDbHelper.getJSON(db, function(jsonTripList) {
                 tripList = tripSectionDbHelper.getUncommitedSections(jsonTripList);
                 assert.equal(tripList.length, 27);
                 realDbQueryDone();

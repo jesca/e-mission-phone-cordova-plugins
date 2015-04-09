@@ -26,13 +26,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             alert("0 rows");
         }
     }
+    */
+    var db = window.sqlitePlugin.openDatabase({name: "TripSections.db", location: 2, createFromLocation: 1});
     tripSectionDbHelper.getJSON({name: "TripSections.db"}, function(jsonTripList){
         alert("this is actually happening");
         console.log("testing other things");
         $scope.trips = tripSectionDbHelper.getUncommittedSections(jsonTripList);
         console.log($scope.trips.length + "trips have been loaded");
     });
-    */
   });
 })
 
