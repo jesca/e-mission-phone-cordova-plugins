@@ -16,23 +16,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     if (window.StatusBar) {
       StatusBar.styleDefault();
     }
-    /*
-    var db = $cordovaSQLite.openDB({name: "TripSections.db"});
-    var query = "SELECT Count(id) AS count FROM currTrips";
-    $cordovaSQLite.execute(db, query).then function(result) {
-        if (result.rows.item(0).count > 0) {
-            alert("database has "+result.rows.item(0)+" rows");
-        } else {
-            alert("0 rows");
-        }
-    }
-    */
     var db = window.sqlitePlugin.openDatabase({name: "TripSections.db", location: 2, createFromLocation: 1});
-    tripSectionDbHelper.getJSON({name: "TripSections.db"}, function(jsonTripList){
-        alert("this is actually happening");
-        console.log("testing other things");
-        $scope.trips = tripSectionDbHelper.getUncommittedSections(jsonTripList);
-        console.log($scope.trips.length + "trips have been loaded");
+    tripSectionDbHelper.getJSON(db, function(jsonTripList) {
+        tripList = tripSectionDbHelper.getUncommitedSections(jsonTripList);
+        console.log("Retrieved trips count = "+tripList.length);
     });
   });
 })

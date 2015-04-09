@@ -4,6 +4,7 @@ angular.module('starter.controllers', ['ionic'])
     console.log("controller TripsCtrl called");
 
     //DATA: Gautham, this is where you link the data.
+    /*
     $scope.trips = [
          {mode:'walking',confidence:1},
          {mode:'car',confidence:0.5},
@@ -11,12 +12,35 @@ angular.module('starter.controllers', ['ionic'])
          {mode:'cycling',confidence:0.3},
          {predictedMode:'cycling',confidence:0.3}
     ];
+    */
+
+    /*
+     * I think that this may be a cause of a controller trying to do too much,
+     * and should probably be moved into a service. 
+     */
+    var db = window.sqlitePlugin.openDatabase({name: "TripSections.db", location: 2, createFromLocation: 1});
+    tripSectionDbHelper.getJSON(db, function(jsonTripList) {
+        $scope.$apply(function () {
+            $scope.trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
+            console.log("In controller, retrieved trips count = "+$scope.trips.length);
+        });
+    });
+
+    /*
+    var db = $cordovaSQLite.openDB({name: "TripSections.db"});
+    tripSectionDbHelper.getJSON({name: "TripSections.db"}, function(jsonTripList){
+        alert("this is actually happening");
+        console.log("testing other things");
+        $scope.trips = tripSectionDbHelper.getUncommittedSections(jsonTripList);
+        console.log($scope.trips.length + "trips have been loaded");
+    });
+    */
 
     $scope.pickImage = function(item){
-        if (item.mode == null) {
+        if (item.predictedMode != null) {
             var item_mode = item.predictedMode;
         } else {
-            var item_mode = item.mode;
+            var item_mode = item.autoMode;
         }
 
     	if (item_mode == 'walking') {
@@ -46,26 +70,6 @@ angular.module('starter.controllers', ['ionic'])
         }
     };
 
-    // I don't think anything after this line is getting executed. Why is that?
-    $ionicPlatform.ready(function() {
-        /*
-        var db = $cordovaSQLite.openDB({name: "TripSections.db"});
-        var query = "SELECT Count(id) AS count FROM currTrips";
-        $cordovaSQLite.execute(db, query).then function(result) {
-            if (result.rows.item(0).count > 0) {
-                alert("database has "+result.rows.item(0)+" rows");
-            } else {
-                alert("0 rows");
-            }
-        }
-        tripSectionDbHelper.getJSON({name: "TripSections.db"}, function(jsonTripList){
-            alert("this is actually happening");
-            console.log("testing other things");
-            $scope.trips = tripSectionDbHelper.getUncommittedSections(jsonTripList);
-            console.log($scope.trips.length + "trips have been loaded");
-        });
-        */
-    })
 })
 
 .controller('PlaylistsCtrl', function($scope) {
