@@ -14,7 +14,6 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-    <script src="js/ng-cordova.min.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
@@ -22,9 +21,14 @@
     <script type="text/javascript" src="listview-js/dbHelper.js"></script>
     <script src="listview-js/app.js"></script>
     <script src="listview-js/controllers.js"></script>
+    <script type="text/javascript">
+       document.addEventListener('deviceready', function onDeviceReady() {
+          angular.bootstrap(document.getElementsByTagName('body')[0], ['starter']);
+       }, false);
+    </script>
   </head>
 
-  <body ng-app="starter" animation="slide-left-right-ios7">
+  <body animation="slide-left-right-ios7">
     <ion-list ng-controller="TripsCtrl" can-swipe="listCanSwipe">
       <ion-item ng-repeat="x in trips" class="item-thumbnail-right  ">
         <div class="item item-divider">

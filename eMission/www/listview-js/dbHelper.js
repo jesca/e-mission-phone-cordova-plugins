@@ -45,14 +45,7 @@ var KEY_USER_CLASSIFICATION = "userClassification";
 
 var tripSectionDbHelper = {
   // callBack must be a function that takes the list of uncommitedSections
-  getJSON: function(database, callBack) {
-    // Unknown error here. When database is being loaded, it seems to fail. The
-    // first alert pops up but not the second.
-
-    // alert("marker 1");
-    var db = window.sqlitePlugin.openDatabase(database);
-    // var db = window.sqlitePlugin.openDatabase({name: "TripSections.db"});
-    // alert("marker 2");
+  getJSON: function(db, callBack) {
     db.transaction(function(tx) {
       tx.executeSql("select " + KEY_SECTION_BLOB + " from " + TABLE_CURR_TRIPS + " where " + KEY_USER_CLASSIFICATION + " is null", [], function(tx, tempTripList) {
         var jsonTripList = [];
