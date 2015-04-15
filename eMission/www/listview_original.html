@@ -29,43 +29,18 @@
   </head>
 
   <body animation="slide-left-right-ios7">
-  <div class="row main">
-  <div class="col col-33 col-33-offset-10">
-    <ul class="img-list">
-        <li>
-            <span class="text-content"><span></span></span>
-
-            <div class="location-holder">
-                <span class="text-content"></span>
-
-                <p><span class="text-content">home</span></p><span class=
-                "text-content"></span>
-            </div>
-
-            <div class="verticalLine">
-                <span class="text-content"></span>
-            </div>
-
-            <div class="location-holder">
-                <span class="text-content"></span>
-
-                <p><span class="text-content">work</span></p>
-            </div>
-
-            <div class="verticalLine">
-                <span class="text-content"></span>
-            </div>
-
-            <div class="location-holder">
-                <span class="text-content"></span>
-
-                <p><span class="text-content">home</span></p><span class=
-                "text-content"></span>
-            </div>
-        </li>
-    </ul>
-    </div>
-    <div class = "col col-33">test</div>
-    </div>
+    <ion-list ng-controller="TripsCtrl" can-swipe="listCanSwipe">
+      <ion-item ng-repeat="x in trips" class="item-thumbnail-right  ">
+        <div class="item item-divider">
+        <div class="color-box" style="background-color: #FF850A;"></div>
+        <h2>{{x.mode}}</h2>
+        <img src={{pickImage(x)}} height="42" width="42" align="center" margin-left="500px">
+        <span class="item-note" style={{pickColor(x)}}>
+          {{x.confidence}}
+        </span>
+        <div class="color-box" style="background-color: #FF850A;"></div>
+        </div>
+      </ion-item>
+    </ion-list>
   </body>
 </html>
