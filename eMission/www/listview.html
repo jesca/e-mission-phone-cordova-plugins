@@ -17,12 +17,11 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-    <style type="text/css">
-      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
-    </style>
+
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8BQ3-gIFLsqR324AmQfGK6wCSauVAcEo">
     </script>
+
     <script type="text/javascript">
       function initialize() {
         var mapOptions = {
@@ -45,48 +44,94 @@
        }, false);
     </script>
   </head>
+<body>
 
-  <body animation="slide-left-right-ios7">
+
+      <div class="tabs tabs-icon-top">
+        <a class="tab-item">
+          <i class="icon ion-home"></i>
+          Home
+        </a>
+        <a class="tab-item">
+          <i class="icon ion-star"></i>
+          Favorites
+        </a>
+        <a class="tab-item">
+          <i class="icon ion-gear-a"></i>
+          Settings
+        </a>
+      </div>
+
   <div class="row main">
-  <div class="col col-33 col-33-offset-10">
-    <ul class="img-list">
-        <li>
-            <span class="text-content"><span></span></span>
+      <div class="col col-33 col-offset-10">
+          <ul class="img-list">
+              <li>
+                  <span class="text-content"><span></span></span>
 
-            <div class="location-holder">
-                <span class="text-content"></span>
+                  <div class="location-holder">
+                      <span class="text-content"></span>
 
-                <p><span class="text-content">home</span></p><span class=
-                "text-content"></span>
-            </div>
+                      <p><span class="text-content">home</span></p><span class=
+                      "text-content"></span>
+                  </div>
+              </li>
+          </ul>
+      </div>
+  </div>
 
-            <div class="verticalLine">
-            </div>
 
-            <body>
-<div id="map-canvas"></div>
-  </body>
+  <div class="row">
+      <div class="col col-33 col-offset-10">
+          <ul class="img-list">
+              <li>
+                  <div class="verticalLine"></div>
+              </li>
+          </ul>
+      </div>
+  </div>
 
-              <span class="text-content"></span>
+    <div class="row">
+        <div class="col col-33 col-offset-10">
+            <ul class="img-list">
+                <li>
+                    <span class="text-content"><span></span></span>
 
-            <div class="location-holder">
-                <span class="text-content"></span>
+                    <div class="location-holder">
+                        <span class="text-content"></span>
 
-                <p><span class="text-content">work</span></p>
-            </div>
-
-            <div class="verticalLine">
-                <span class="text-content"></span>
-            </div>
-
-            <div class="location-holder">
-                <span class="text-content"></span>
-
-                <p><span class="text-content">home</span></p><span class=
-                "text-content"></span>
-            </div>
-        </li>
-    </ul>
+                        <p><span class="text-content">work</span></p><span class=
+                        "text-content"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
+    <div class="row">
+        <div class="col col-33 col-offset-10">
+            <ul class="img-list">
+                <li>
+                    <div class="verticalLine"></div>
+                </li>
+            </ul>
+        </div>
+        <div class = "col col-33"><div class = "map-container"><div id = "map-canvas"></div></div></div>
+    </div>
+    <div class="row " >
+        <div class="col col-33 col-offset-10">
+            <ul class="img-list">
+                <li>
+                    <span class="text-content"><span></span></span>
+
+                    <div class="location-holder">
+                        <span class="text-content"></span>
+
+                        <p><span class="text-content">home</span></p><span class=
+                        "text-content"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
   </body>
 </html>

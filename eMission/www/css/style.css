@@ -1,14 +1,12 @@
-/* Empty. Add your own CSS if you like */
 
 ul.img-list {
     list-style-type: none;
-    padding: 0;
+    padding-bottom:2.5px;
 }
 
 ul.img-list li {
     display: inline-block;
     position: relative;
-    height: 350px;
 }
 
 
@@ -18,15 +16,21 @@ ul.img-list li {
 
 .location-holder {
        position:relative;
-    width:100px;
-    height:100px;
+    width:80px;
+    height:80px;
     text-align:center;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
  border: 2px solid #000000;
+ padding:5px;
 }
 
-
+ .row {
+padding:0px;
+ }
+ .col {
+   padding:0px !important;
+ }
 
 .location-holder:hover {
     background-color: #d3d3d3;
@@ -35,8 +39,8 @@ ul.img-list li {
 
 .location-holder p
 {
-    margin-top:15px;
-    font:italic 25px Georgia;
+    margin-top:10px;
+    font: 18px arial;
     color:#000000;
     vertical-align:middle;
     height:50px;
@@ -45,11 +49,18 @@ ul.img-list li {
 }
 .verticalLine {
     border-left: thick solid #000000;
-    height:100px;
-    margin-left:50px;
+    height:150px;
+    margin-left:38px;
 }
 
 .verticalLineMap {
   width:100px;
   height:100px;
 }
+
+.map-container {
+  height:150px;
+  width:150px;
+}
+
+#map-canvas { height: 100%; margin: 0; padding: 0;}
