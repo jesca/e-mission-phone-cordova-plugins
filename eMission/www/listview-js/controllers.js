@@ -1,5 +1,6 @@
 angular.module('starter.controllers', ['ionic'])
 
+
 .controller("TripsCtrl", function($scope, $ionicPlatform) {
     console.log("controller TripsCtrl called");
 
@@ -16,7 +17,7 @@ angular.module('starter.controllers', ['ionic'])
 
     /*
      * I think that this may be a cause of a controller trying to do too much,
-     * and should probably be moved into a service. 
+     * and should probably be moved into a service.
      */
     var db = window.sqlitePlugin.openDatabase({name: "TripSections.db", location: 2, createFromLocation: 1});
     tripSectionDbHelper.getJSON(db, function(jsonTripList) {
@@ -58,7 +59,7 @@ angular.module('starter.controllers', ['ionic'])
         }
     };
 
-    //Change according to datatype in actual data object and the intervals set in the app. 
+    //Change according to datatype in actual data object and the intervals set in the app.
     // Intervals: Green - confidence > 80 ; Yellow: 80 > confidence > 70; Red: 70 > confidence
     $scope.pickColor = function(item){
         if (item.confidence >= 0.9) {
@@ -68,6 +69,30 @@ angular.module('starter.controllers', ['ionic'])
         } else {
             return "color : red";
         }
+    };
+
+    $scope.mapCreated = function(map) {
+      $scope.map = map;
+    };
+
+    $scope.centerOnMe = function () {
+      console.log("Centering");
+      if (!$scope.map) {
+        return;
+      }
+
+      $scope.loading = $ionicLoading.show({
+        content: 'Getting current location...',
+        showBackdrop: false
+      });
+
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        console.log('Got pos', pos);
+        $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+        $scope.loading.hide();
+      }, function (error) {
+        alert('Unable to get location: ' + error.message);
+      });
     };
 
 })

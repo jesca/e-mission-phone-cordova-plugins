@@ -114,7 +114,9 @@
                 </li>
             </ul>
         </div>
-        <div class = "col col-33"><div class = "map-container"><div id = "map-canvas"></div></div></div>
+        <ion-content scroll="false">
+          <map on-create="mapCreated(map)"></map>
+        </ion-content>
     </div>
     <div class="row " >
         <div class="col col-33 col-offset-10">
