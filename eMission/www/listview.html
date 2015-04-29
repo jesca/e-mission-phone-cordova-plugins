@@ -45,7 +45,6 @@
     </script>
   </head>
 <body>
-
 <ion-view>
   <ion-content>
     <ion-list ng-controller="TripsCtrl">
@@ -60,12 +59,14 @@
           <ul class="img-list">
               <li>
                   <span class="text-content"><span></span></span>
-                  <div class="location-holder">
+                  <div class="location-holder" style="float: left">
                       <span class="text-content"></span>
 
-                      <p><span class="text-content">{{x.sectionId}}</span></p><span class=
-                      "text-content"></span>
+                      <p><span class="text-content">{{x.sectionId}}</span></p>
+                      <span class="text-content">
+                      </span>
                   </div>
+                  <div class="display-name">{{getDisplayName(x)}}</div>
               </li>
           </ul>
       </div>
@@ -74,7 +75,6 @@
   </ion-list>
 </ion-content>
 </ion-view>
-
 <ion-content>
   <ion-view>
     <ion-tabs>
@@ -95,7 +95,6 @@
     </ion-tabs>
   </ion-content>
 </ion-view>
-
 
 </body>
 </html>

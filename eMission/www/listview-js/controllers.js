@@ -27,19 +27,15 @@ angular.module('starter.controllers', ['ionic'])
             var all_trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
             var mr_trip = tripSectionDbHelper.getUncommitedSections(jsonTripList).pop();
             var mr_trips = [mr_trip];
-            console.log("mr_trip" + JSON.stringify(mr_trip));
             var today = new Date(mr_trip.startTime.date);
             for (var i = 0; i < all_trips; i++) {
               var trip = all_trips[i];
-              console.log("trip in all_trips " + JSON.stringify(trip))
-
               // hacky way to check if date is the same
               var tripDate = new Date(trip.startTime.date)
               if (tripDate.getMonth() == today.getMonth()) {
                 if (tripDate.getDay() == today.getDay()) {
                   if (tripDate.getYear() == today.getYear()) {
                     mr_trips.push(trip);
-                    console.log('finalized mr_trip array: ' + mr_trips);
                   }
                 }
               }
@@ -48,6 +44,33 @@ angular.module('starter.controllers', ['ionic'])
             $scope.date = "" + today.getMonth() + "/" + today.getDay() + "/" + today.getYear();
         });
     });
+
+    $scope.getDisplayName = function(item) {
+      var coordinatesString = item["trackPoints"][0]["coordinate"][1] + "," + item["trackPoints"][0]["coordinate"][0]
+      var xmlHttp = new XMLHttpRequest();
+      var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + coordinatesString + "&key=AIzaSyD8BQ3-gIFLsqR324AmQfGK6wCSauVAcEo"
+      console.log(url)
+      xmlHttp.open("GET", url, false);
+      xmlHttp.send();
+      var address_components = JSON.parse(xmlHttp.response)["results"][0]["address_components"];
+      var name = ""
+      for (var i = 0; i < address_components.length; i++) {
+        var component = address_components[i]
+        var types = component["types"]
+        if (types.indexOf("neighborhood") > -1) {
+          name = component["short_name"];
+          break;
+        } else if (types.indexOf("establishment") > -1) {
+          name = component["short_name"];
+          break;
+        } else if (types.indexOf("locality") > -1) {
+          name = component["short_name"];
+          break;
+        }
+      }
+      console.log(name)
+      return name
+    }
 
     /*
     var db = $cordovaSQLite.openDB({name: "TripSections.db"});
