@@ -1,14 +1,22 @@
 
-ul.img-list {
+.no-margin {
+  margin:0px !important;
+  padding:0px !important;
+  }
+
+  ul.img-list {
     list-style-type: none;
-    padding-bottom:2.5px;
-}
+ }
 
 ul.img-list li {
     display: inline-block;
     position: relative;
 }
 
+.item {
+  border:0px !important;
+
+}
 
 .main {
     margin-top:50px;
@@ -24,14 +32,7 @@ ul.img-list li {
     -moz-border-radius: 50px;
  border: 2px solid #000000;
  padding:5px;
- display: inline-block;
 }
-
-.display-name {
-    display: inline-block;
-}
-
-
 
  .row {
 padding:0px;
@@ -48,12 +49,12 @@ padding:0px;
 .location-holder p
 {
     margin-top:10px;
-    font: 18px arial;
+    font: 12px arial;
     color:#000000;
     vertical-align:middle;
     height:50px;
     position: inherit;
-    top:15%;
+    top:25%;
 }
 .verticalLine {
     border-left: thick solid #000000;
@@ -74,6 +75,7 @@ padding:0px;
 #map-canvas { height: 100%; margin: 0; padding: 0;}
 
 .date {
-  font-size:18px;
+  font-size:25px;
+  font-style:bold;
   text-align:center;
 }

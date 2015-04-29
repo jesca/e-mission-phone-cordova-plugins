@@ -45,8 +45,9 @@
     </script>
   </head>
 <body>
-<ion-view>
+<ion-nav-view>
   <ion-content>
+    <div class = "row">
     <ion-list ng-controller="TripsCtrl">
       <div class = "row main">
         <div class = "col date">
@@ -54,47 +55,50 @@
         </div>
       </div>
 
-      <ion-item ng-repeat="x in trips" class="row">
+      <ion-item ng-repeat="x in trips" class = "no-margin">
         <div class="col col-33 col-offset-10">
           <ul class="img-list">
               <li>
-                  <span class="text-content"><span></span></span>
-                  <div class="location-holder" style="float: left">
-                      <span class="text-content"></span>
-
-                      <p><span class="text-content">{{x.sectionId}}</span></p>
-                      <span class="text-content">
-                      </span>
+                  <div class="location-holder">
+                      <p>{{getDisplayName(x)}} </p>
                   </div>
-                  <div class="display-name">{{getDisplayName(x)}}</div>
+
               </li>
           </ul>
       </div>
-      <div class = "verticalLine" ng-if="$index > trips.length-1"></div>
-    </ion-item>
-  </ion-list>
-</ion-content>
-</ion-view>
-<ion-content>
-  <ion-view>
-    <ion-tabs>
-      <div class="tabs tabs-icon-top">
-        <a class="tab-item">
-          <i class="icon ion-merge"></i>
-          Trips
-        </a>
-        <a class="tab-item">
-          <i class="icon ion-location"></i>
-          Recommendation
-        </a>
-        <a class="tab-item">
-          <i class="icon ion-compose"></i>
-          Results
-        </a>
+      <div class = "row" ng-if="notSingleOrLast($index, trips)">
+          <div class="col col-33 col-offset-10">
+              <ul class="img-list">
+                  <li>
+                      <div class="verticalLine"></div>
+                  </li>
+              </ul>
+          </div>
       </div>
-    </ion-tabs>
-  </ion-content>
-</ion-view>
+
+      </ion-item>
+  </ion-list>
+
+</div>
+
+</ion-content>
+
+     <ion-tabs class="tabs-positive tabs-icon-top">
+
+    <ion-tab title="Home" icon="ion-merge">
+      Trips
+    </ion-tab>
+
+    <ion-tab title="About" icon="ion-location">
+      Recommendation
+    </ion-tab>
+
+    <ion-tab title="Settings" icon="ion-compose">
+      Results
+    </ion-tab>
+
+  </ion-tabs>
+ </ion-nav-view>
 
 </body>
 </html>
