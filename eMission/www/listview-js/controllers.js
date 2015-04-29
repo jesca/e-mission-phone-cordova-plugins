@@ -16,13 +16,36 @@ angular.module('starter.controllers', ['ionic'])
 
     /*
      * I think that this may be a cause of a controller trying to do too much,
-     * and should probably be moved into a service. 
+     * and should probably be moved into a service.
      */
+
+    // code to get trips from most recent day only
     var db = window.sqlitePlugin.openDatabase({name: "TripSections.db", location: 2, createFromLocation: 1});
     tripSectionDbHelper.getJSON(db, function(jsonTripList) {
         $scope.$apply(function () {
-            $scope.trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
-            console.log("In controller, retrieved trips count = "+$scope.trips.length);
+            //$scope.trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
+            var all_trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
+            var mr_trip = tripSectionDbHelper.getUncommitedSections(jsonTripList).pop();
+            var mr_trips = [mr_trip];
+            console.log("mr_trip" + JSON.stringify(mr_trip));
+            var today = new Date(mr_trip.startTime.date);
+            for (var i = 0; i < all_trips; i++) {
+              var trip = all_trips[i];
+              console.log("trip in all_trips " + JSON.stringify(trip))
+
+              // hacky way to check if date is the same
+              var tripDate = new Date(trip.startTime.date)
+              if (tripDate.getMonth() == today.getMonth()) {
+                if (tripDate.getDay() == today.getDay()) {
+                  if (tripDate.getYear() == today.getYear()) {
+                    mr_trips.push(trip);
+                    console.log('finalized mr_trip array: ' + mr_trips);
+                  }
+                }
+              }
+            }
+            $scope.trips = mr_trips;
+            $scope.date = "" + today.getMonth() + "/" + today.getDay() + "/" + today.getYear();
         });
     });
 
@@ -58,7 +81,7 @@ angular.module('starter.controllers', ['ionic'])
         }
     };
 
-    //Change according to datatype in actual data object and the intervals set in the app. 
+    //Change according to datatype in actual data object and the intervals set in the app.
     // Intervals: Green - confidence > 80 ; Yellow: 80 > confidence > 70; Red: 70 > confidence
     $scope.pickColor = function(item){
         if (item.confidence >= 0.9) {

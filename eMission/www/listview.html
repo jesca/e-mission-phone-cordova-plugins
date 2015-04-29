@@ -17,6 +17,23 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
+
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8BQ3-gIFLsqR324AmQfGK6wCSauVAcEo">
+    </script>
+
+    <script type="text/javascript">
+      function initialize() {
+        var mapOptions = {
+          center: { lat: -34.397, lng: 150.644},
+          zoom: 8
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
     <!-- your app's js -->
     <script type="text/javascript" src="listview-js/dbHelper.js"></script>
     <script src="listview-js/app.js"></script>
@@ -27,20 +44,58 @@
        }, false);
     </script>
   </head>
+<body>
 
-  <body animation="slide-left-right-ios7">
-    <ion-list ng-controller="TripsCtrl" can-swipe="listCanSwipe">
-      <ion-item ng-repeat="x in trips" class="item-thumbnail-right  ">
-        <div class="item item-divider">
-        <div class="color-box" style="background-color: #FF850A;"></div>
-        <h2>{{x.mode}}</h2>
-        <img src={{pickImage(x)}} height="42" width="42" align="center" margin-left="500px">
-        <span class="item-note" style={{pickColor(x)}}>
-          {{x.confidence}}
-        </span>
-        <div class="color-box" style="background-color: #FF850A;"></div>
+<ion-view>
+  <ion-content>
+    <ion-list ng-controller="TripsCtrl">
+      <div class = "row main">
+        <div class = "col date">
+          {{date}}
         </div>
-      </ion-item>
-    </ion-list>
-  </body>
+      </div>
+
+      <ion-item ng-repeat="x in trips" class="row">
+        <div class="col col-33 col-offset-10">
+          <ul class="img-list">
+              <li>
+                  <span class="text-content"><span></span></span>
+                  <div class="location-holder">
+                      <span class="text-content"></span>
+
+                      <p><span class="text-content">{{x.sectionId}}</span></p><span class=
+                      "text-content"></span>
+                  </div>
+              </li>
+          </ul>
+      </div>
+      <div class = "verticalLine" ng-if="$index > trips.length-2"></div>
+    </ion-item>
+  </ion-list>
+</ion-content>
+</ion-view>
+
+<ion-content>
+  <ion-view>
+    <ion-tabs>
+      <div class="tabs tabs-icon-top">
+        <a class="tab-item">
+          <i class="icon ion-merge"></i>
+          Trips
+        </a>
+        <a class="tab-item">
+          <i class="icon ion-location"></i>
+          Recommendation
+        </a>
+        <a class="tab-item">
+          <i class="icon ion-compose"></i>
+          Results
+        </a>
+      </div>
+    </ion-tabs>
+  </ion-content>
+</ion-view>
+
+
+</body>
 </html>
