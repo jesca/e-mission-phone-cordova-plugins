@@ -151,11 +151,29 @@ angular.module('starter.controllers', ['ionic'])
       if ($scope.path) {
         $scope.path.setMap(null)
       }
-      var latitude = item["trackPoints"][0]["coordinate"][1]
-      var longitude = item["trackPoints"][0]["coordinate"][0]
+      if ($scope.startMarker) {
+        $scope.startMarker.setMap(null)
+      }
+      if ($scope.endMarker) {
+        $scope.endMarker.setMap(null)
+      }
+      var points = item["trackPoints"]
+      var latitude = points[0]["coordinate"][1]
+      var longitude = points[0]["coordinate"][0]
+      var endLat = points[points.length-1]["coordinate"][1]
+      var endLng = points[points.length-1]["coordinate"][0]
+      $scope.startMarker = new google.maps.Marker({
+          position: new google.maps.LatLng(latitude,longitude),
+          title:"Start"
+      });
+      $scope.startMarker.setMap($scope.map)
+      $scope.endMarker = new google.maps.Marker({
+          position: new google.maps.LatLng(endLat,endLng),
+          title:"End"
+      });
+      $scope.endMarker.setMap($scope.map)
       $scope.map.setCenter({lat: latitude, lng:longitude})
       var coordinates = [];
-      var points = item["trackPoints"]
       for (var i = 0; i < points.length; i++) {
         coordinates.push(new google.maps.LatLng(points[i]["coordinate"][1], points[i]["coordinate"][0]))
       }
