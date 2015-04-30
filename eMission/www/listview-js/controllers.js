@@ -146,10 +146,28 @@ angular.module('starter.controllers', ['ionic'])
         }
     };
 
-    $scope.centerMap = function(item) {
+    $scope.setupMap = function(item) {
+      console.log(JSON.stringify(item));
+      if ($scope.path) {
+        $scope.path.setMap(null)
+      }
       var latitude = item["trackPoints"][0]["coordinate"][1]
       var longitude = item["trackPoints"][0]["coordinate"][0]
       $scope.map.setCenter({lat: latitude, lng:longitude})
+      var coordinates = [];
+      var points = item["trackPoints"]
+      for (var i = 0; i < points.length; i++) {
+        coordinates.push(new google.maps.LatLng(points[i]["coordinate"][1], points[i]["coordinate"][0]))
+      }
+      var path = new google.maps.Polyline({
+        path: coordinates,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+      $scope.path = path
+      path.setMap($scope.map)
     }
 
     //Change according to datatype in actual data object and the intervals set in the app.
