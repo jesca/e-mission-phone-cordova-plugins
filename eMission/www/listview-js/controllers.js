@@ -146,6 +146,12 @@ angular.module('starter.controllers', ['ionic'])
         }
     };
 
+    $scope.centerMap = function(item) {
+      var latitude = item["trackPoints"][0]["coordinate"][1]
+      var longitude = item["trackPoints"][0]["coordinate"][0]
+      $scope.map.setCenter({lat: latitude, lng:longitude})
+    }
+
     //Change according to datatype in actual data object and the intervals set in the app.
     // Intervals: Green - confidence > 80 ; Yellow: 80 > confidence > 70; Red: 70 > confidence
     $scope.pickColor = function(item){
