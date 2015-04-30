@@ -27,8 +27,9 @@ angular.module('starter.controllers', ['ionic'])
 
               var all_trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
               var mr_trip = tripSectionDbHelper.getUncommitedSections(jsonTripList).pop();
+              var last_five_trips = [];
               var mr_trips = [mr_trip];
-              console.log("mr_trip" + JSON.stringify(mr_trip));
+
               var today = new Date(mr_trip.startTime.date);
               for (var i = 0; i < all_trips; i++) {
                 var trip = all_trips[i];
