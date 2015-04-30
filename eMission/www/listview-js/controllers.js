@@ -23,7 +23,8 @@ angular.module('starter.controllers', ['ionic'])
     var db = window.sqlitePlugin.openDatabase({name: "TripSections.db", location: 2, createFromLocation: 1});
       tripSectionDbHelper.getJSON(db, function(jsonTripList) {
           $scope.$apply(function () {
-              //$scope.trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
+              $scope.trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
+
               var all_trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
               var mr_trip = tripSectionDbHelper.getUncommitedSections(jsonTripList).pop();
               var mr_trips = [mr_trip];
@@ -44,7 +45,7 @@ angular.module('starter.controllers', ['ionic'])
                   }
                 }
               }
-              $scope.trips = mr_trips;
+              //$scope.trips = mr_trips;
               $scope.date = "" + today.getMonth() + "/" + today.getDay() + "/" + today.getYear();
           });
       });
@@ -59,6 +60,31 @@ angular.module('starter.controllers', ['ionic'])
         return true;
       }
 
+    };
+    $scope.mapCreated = function(map) {
+      console.log("maps here");
+      console.log(map)
+      $scope.map = map;
+    };
+
+    $scope.centerOnMe = function () {
+      console.log("Centering");
+      if (!$scope.map) {
+        return;
+      }
+
+      $scope.loading = $ionicLoading.show({
+        content: 'Getting current location...',
+        showBackdrop: false
+      });
+
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        console.log('Got pos', pos);
+        $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+        $scope.loading.hide();
+      }, function (error) {
+        alert('Unable to get location: ' + error.message);
+      });
     };
 
     $scope.getDisplayName = function(item) {
@@ -85,7 +111,7 @@ angular.module('starter.controllers', ['ionic'])
       }
     }
     return name
-  }
+  };
 
     /*
     var db = $cordovaSQLite.openDB({name: "TripSections.db"});
@@ -130,6 +156,10 @@ angular.module('starter.controllers', ['ionic'])
             return "color : red";
         }
     };
+
+
+
+
 
 })
 

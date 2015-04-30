@@ -16,39 +16,22 @@
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
-
-
-    <script type="text/javascript"
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8BQ3-gIFLsqR324AmQfGK6wCSauVAcEo">
-    </script>
-
-    <script type="text/javascript">
-      function initialize() {
-        var mapOptions = {
-          center: { lat: -34.397, lng: 150.644},
-          zoom: 8
-        };
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
-      }
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB16sGmIekuGIvYOfNoW9T44377IU2d2Es&sensor=true"></script>
     <!-- your app's js -->
     <script type="text/javascript" src="listview-js/dbHelper.js"></script>
     <script src="listview-js/app.js"></script>
     <script src="listview-js/controllers.js"></script>
+    <script src="listview-js/directives.js"></script>
     <script type="text/javascript">
        document.addEventListener('deviceready', function onDeviceReady() {
           angular.bootstrap(document.getElementsByTagName('body')[0], ['starter']);
        }, false);
     </script>
   </head>
-<body>
+<body ng-app = "starter" ng-controller="TripsCtrl">
 <ion-nav-view>
   <ion-content>
-    <div class = "row">
-    <ion-list ng-controller="TripsCtrl">
+    <ion-list>
       <div class = "row main">
         <div class = "col date">
           {{date}}
@@ -78,25 +61,20 @@
 
       </ion-item>
   </ion-list>
-
-</div>
-
+  <ion-content scroll="false">
+   <map on-create="mapCreated(map)"></map>
+ </ion-content>
 </ion-content>
+
 
      <ion-tabs class="tabs-positive tabs-icon-top">
 
-    <ion-tab title="Home" icon="ion-merge">
-      Trips
+    <ion-tab title="Trips" icon="ion-merge">
     </ion-tab>
-
-    <ion-tab title="About" icon="ion-location">
-      Recommendation
+    <ion-tab title="Recommendation" icon="ion-location">
     </ion-tab>
-
-    <ion-tab title="Settings" icon="ion-compose">
-      Results
+    <ion-tab title="About" icon="ion-compose">
     </ion-tab>
-
   </ion-tabs>
  </ion-nav-view>
 
