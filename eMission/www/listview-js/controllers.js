@@ -23,37 +23,51 @@ angular.module('starter.controllers', ['ionic'])
     var db = window.sqlitePlugin.openDatabase({name: "TripSections.db", location: 2, createFromLocation: 1});
       tripSectionDbHelper.getJSON(db, function(jsonTripList) {
           $scope.$apply(function () {
+              console.log("json");
+              console.log(jsonTripList);
               $scope.trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
 
               var all_trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
-              var mr_trip = tripSectionDbHelper.getUncommitedSections(jsonTripList).pop();
               var last_five_trips = [];
-              var mr_trips = [mr_trip];
+              var sec = tripSectionDbHelper.getUncommitedSections(jsonTripList);
 
-              var today = new Date(mr_trip.startTime.date);
-              for (var i = 0; i < all_trips; i++) {
-                var trip = all_trips[i];
-                console.log("trip in all_trips " + JSON.stringify(trip))
+              // get all sections for the last five days
+              for (var j = 0; j < 5; j++) {
+                var mr_trip = sec.pop();
+                console.log("j is " + j);
+                console.log(mr_trip);
+                var mr_trips = [mr_trip];
+                var today = new Date(mr_trip.startTime.date);
+                for (var i = 0; i < all_trips; i++) {
+                  var trip = all_trips[i];
+                  // hacky way to check if date is the same
+                  var tripDate = new Date(trip.startTime.date)
+                  if (tripDate.getMonth() == today.getMonth()) {
+                    if (tripDate.getDay() == today.getDay()) {
+                      if (tripDate.getYear() == today.getYear()) {
+                        mr_trips.push(trip);
+                        console.log('finalized mr_trip array: ' + mr_trips);
+                     }
+                   }
+                 }
+               }
+               last_five_trips.push(mr_trips);
 
-                // hacky way to check if date is the same
-                var tripDate = new Date(trip.startTime.date)
-                if (tripDate.getMonth() == today.getMonth()) {
-                  if (tripDate.getDay() == today.getDay()) {
-                    if (tripDate.getYear() == today.getYear()) {
-                      mr_trips.push(trip);
-                      console.log('finalized mr_trip array: ' + mr_trips);
-                    }
-                  }
-                }
               }
+              console.log('last five');
+              console.log(last_five_trips);
               //$scope.trips = mr_trips;
-              $scope.date = "" + today.getMonth() + "/" + today.getDay() + "/" + today.getYear();
+
           });
       });
 
+    $scope.getDateOfTrip = function(trip) {
+      var today = new Date(mr_trip.startTime.date);
+      return ("" + today.getMonth() + "/" + today.getDay() + "/" + today.getYear());
+    }
+
 
     $scope.notSingleOrLast = function(index, list) {
-      console.log('index' + index);
       if (index == list.length-1) {
         return false;
       }
