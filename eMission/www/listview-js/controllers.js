@@ -101,6 +101,7 @@ angular.module('starter.controllers', ['ionic'])
     console.log("maps here");
     console.log(map)
     $scope.map = map;
+    $scope.setupMap($scope.data.slides[0]["trip_val"][0]);
   };
 
   $scope.centerOnMe = function() {
