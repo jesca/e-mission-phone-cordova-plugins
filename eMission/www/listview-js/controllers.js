@@ -222,6 +222,11 @@ angular.module('starter.controllers', ['ionic'])
       });
       $scope.path = path
       path.setMap($scope.map)
+      var bounds = new google.maps.LatLngBounds();
+      for (var i = 0; i < coordinates.length; i++) {
+        bounds.extend(coordinates[i]);
+      }
+      $scope.map.fitBounds(bounds);
     }
 
     //Change according to datatype in actual data object and the intervals set in the app.
