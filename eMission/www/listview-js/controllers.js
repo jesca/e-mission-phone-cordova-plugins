@@ -32,27 +32,32 @@ angular.module('starter.controllers', ['ionic'])
 
               // get all sections for the last five days
               for (var j = 0; j < 5; j++) {
-                console.log('sec j')
-                console.log(sec)
+                console.log('length of sec ' + sec.length);
+                console.log('first thing in sec is ' + sec[sec.length-1].startTime.date)
+
                 var mr_trip = sec.pop();
                 var mr_trips = [mr_trip];
-                var key_date = getDateOfTrip(mr_trip);
                 var today = new Date(mr_trip.startTime.date);
-                for (var i = 0; i < sec.length; i++) {
+                var key_date = getDateOfTrip(today);
+                console.log(today);
+                console.log('date key is ' + key_date)
+                for (var i = sec.length-1; i >=0;) {
                   var trip = sec[i];
                   // hacky way to check if date is the same
                   var tripDate = new Date(trip.startTime.date)
-                  console.log('compare to ' + tripDate)
                   console.log('trip date is ' + tripDate)
                   if (tripDate.getMonth() == today.getMonth()) {
-                    if (tripDate.getDay() == today.getDay()) {
-                      if (tripDate.getYear() == today.getYear()) {
-                        mr_trips.push(trip);
-                        sec.pop(i);
+                    if (tripDate.getDate() == today.getDate()) {
+                      if (tripDate.getFullYear() == today.getFullYear()) {
+                        console.log('matched')
+                        sec.splice(i,1);
+                        mr_trips.unshift(trip);
 
                      }
                    }
                  }
+                 console.log(i);
+                 i--;
                 }
                 dic['date_key'] = key_date;
                 dic['trip_val'] = mr_trips;
@@ -69,9 +74,8 @@ angular.module('starter.controllers', ['ionic'])
           });
       });
 
-    var getDateOfTrip = function(trip) {
-      var today = new Date(trip.startTime.date);
-      return ("" + today.getMonth() + "/" + today.getDay() + "/" + today.getYear());
+    var getDateOfTrip = function(trip_date) {
+      return ("" + (trip_date.getUTCMonth()+1) + "/" + trip_date.getDate() + "/" + trip_date.getUTCFullYear());
     }
 
 
@@ -82,8 +86,14 @@ angular.module('starter.controllers', ['ionic'])
       else {
         return true;
       }
-
     };
+
+    $scope.slideHasChanged = function(index) {
+      console.log("slide changed to index: " + index);
+      var trip = $scope.data.slides[index];
+      $scope.setupMap(trip["trip_val"][0]);
+    }
+
     $scope.mapCreated = function(map) {
       console.log("maps here");
       console.log(map)
@@ -225,11 +235,6 @@ angular.module('starter.controllers', ['ionic'])
             return "color : red";
         }
     };
-
-
-
-
-
 })
 
 .controller('PlaylistsCtrl', function($scope) {

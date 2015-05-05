@@ -30,10 +30,9 @@
   </head>
 <body ng-app = "starter" ng-controller="TripsCtrl" animation="slide-left-right-ios7">
   <ion-view>
-     <ion-slide-box show-pager="true">
-      <ion-slide ng-repeat="trip in data.slides">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="true">
+       <ion-slide ng-repeat="trip in data.slides">
         <ion-content>
-
          <ion-list>
           <div class = "row main">
             <div class = "col date">
