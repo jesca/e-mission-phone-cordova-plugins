@@ -66,7 +66,7 @@ angular.module('starter.controllers', ['ionic'])
 
     var getDateOfTrip = function(trip) {
       var today = new Date(trip.startTime.date);
-      return ("" + today.getMonth() + "/" + today.getDay() + "/" + today.getYear());
+      return ("" + today.getMonth() + "/" + today.getDay() + "/" + today.getFullYear());
     }
 
 
