@@ -131,23 +131,28 @@ angular.module('starter.controllers', ['ionic'])
     console.log(url)
     xmlHttp.open("GET", url, false);
     xmlHttp.send();
-    var address_components = JSON.parse(xmlHttp.response)["results"][0]["address_components"];
-    var name = ""
-    for (var i = 0; i < address_components.length; i++) {
-      var component = address_components[i]
-      var types = component["types"]
-      if (types.indexOf("neighborhood") > -1) {
-        name = component["short_name"];
-        break;
-      } else if (types.indexOf("establishment") > -1) {
-        name = component["short_name"];
-        break;
-      } else if (types.indexOf("locality") > -1) {
-        name = component["short_name"];
-        break;
+    var results = JSON.parse(xmlHttp.response)["results"];
+    if (results.length > 0) {
+      var address_components = results[0]["address_components"];
+      var name = ""
+      for (var i = 0; i < address_components.length; i++) {
+        var component = address_components[i]
+        var types = component["types"]
+        if (types.indexOf("neighborhood") > -1) {
+          name = component["short_name"];
+          break;
+        } else if (types.indexOf("establishment") > -1) {
+          name = component["short_name"];
+          break;
+        } else if (types.indexOf("locality") > -1) {
+          name = component["short_name"];
+          break;
+        }
       }
+      return name
+    } else {
+      return "over limit";
     }
-    return name
   };
 
   /*
