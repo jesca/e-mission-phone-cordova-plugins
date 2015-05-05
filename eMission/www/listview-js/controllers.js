@@ -71,9 +71,8 @@ angular.module('starter.controllers', ['ionic'])
       return ("" + (trip_date.getUTCMonth()+1) + "/" + trip_date.getDate() + "/" + trip_date.getUTCFullYear());
     };
 
+
     $scope.getTime = function(date){
-      console.log('get time for ' + date);
-      console.log(date.getHours())
       var min = (date.getMinutes()<10?'0':'') + date.getMinutes();
       return ("" + date.getHours() + ":" + min);
     }
