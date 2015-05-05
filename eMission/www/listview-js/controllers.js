@@ -200,12 +200,12 @@ angular.module('starter.controllers', ['ionic'])
       var endLng = points[points.length-1]["coordinate"][0]
       $scope.startMarker = new google.maps.Marker({
           position: new google.maps.LatLng(latitude,longitude),
-          title:"Start"
+          icon: 'img/maps-markera.png'
       });
       $scope.startMarker.setMap($scope.map)
       $scope.endMarker = new google.maps.Marker({
           position: new google.maps.LatLng(endLat,endLng),
-          title:"End"
+          icon: 'img/maps-markerb.png'
       });
       $scope.endMarker.setMap($scope.map)
       $scope.map.setCenter({lat: latitude, lng:longitude})
