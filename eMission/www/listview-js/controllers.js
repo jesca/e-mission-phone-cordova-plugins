@@ -72,82 +72,82 @@ angular.module('starter.controllers', ['ionic'])
   });
 
 
-     var getDateOfTrip = function(date) {
-        var month;
-        var date;
+  var getDateOfTrip = function(date) {
+    var month;
+    var date;
 
-        switch (date.getMonth() + 1) {
+    switch (date.getMonth() + 1) {
       case 1:
-          month = "January";
-          break;
+        month = "January";
+        break;
       case 2:
-          month = "February";
-          break;
+        month = "February";
+        break;
       case 3:
-          month = "March";
-          break;
+        month = "March";
+        break;
       case 4:
-          month = "April";
-          break;
+        month = "April";
+        break;
       case 5:
-          month = "May";
-          break;
+        month = "May";
+        break;
       case 6:
-          month = "June";
-          break;
+        month = "June";
+        break;
       case 7:
-          month  = "July";
-          break;
+        month = "July";
+        break;
       case 8:
-          month = "August";
-          break;
+        month = "August";
+        break;
       case 9:
-          month = "September";
-          break;
+        month = "September";
+        break;
       case 10:
-          month = "October";
-          break;
+        month = "October";
+        break;
       case 11:
-          month = "November";
-          break;
+        month = "November";
+        break;
       case 12:
-          month = "December";
-          break;
+        month = "December";
+        break;
 
-      };
-
-      switch (date.getDay() + 1) {
-      case 1:
-      day = "Sunday";
-      break;
-      case 2:
-      day = "Monday";
-      break;
-      case 3:
-      day = "Tuesday";
-      break;
-      case 4:
-      day = "Wednesday";
-      break;
-      case 5:
-      day = "Thursday";
-      break;
-      case 6:
-      day = "Friday";
-      break;
-      case 7:
-      day = "Saturday";
-      break;
-      };
-
-      return (day + ", " + month + " " + date.getDate() + ", " +date.getFullYear());
-      };
-
-
-    $scope.getTime = function(date){
-      var min = (date.getMinutes()<10?'0':'') + date.getMinutes();
-      return ("" + date.getHours() + ":" + min);
     };
+
+    switch (date.getDay() + 1) {
+      case 1:
+        day = "Sunday";
+        break;
+      case 2:
+        day = "Monday";
+        break;
+      case 3:
+        day = "Tuesday";
+        break;
+      case 4:
+        day = "Wednesday";
+        break;
+      case 5:
+        day = "Thursday";
+        break;
+      case 6:
+        day = "Friday";
+        break;
+      case 7:
+        day = "Saturday";
+        break;
+    };
+
+    return (day + ", " + month + " " + date.getDate() + ", " + date.getFullYear());
+  };
+
+
+  $scope.getTime = function(date) {
+    var min = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+    return ("" + date.getHours() + ":" + min);
+  };
 
   $scope.notSingleOrLast = function(index, list) {
     if (index == list.length - 1) {
@@ -197,23 +197,28 @@ angular.module('starter.controllers', ['ionic'])
     console.log(url)
     xmlHttp.open("GET", url, false);
     xmlHttp.send();
-    var address_components = JSON.parse(xmlHttp.response)["results"][0]["address_components"];
-    var name = ""
-    for (var i = 0; i < address_components.length; i++) {
-      var component = address_components[i]
-      var types = component["types"]
-      if (types.indexOf("neighborhood") > -1) {
-        name = component["short_name"];
-        break;
-      } else if (types.indexOf("establishment") > -1) {
-        name = component["short_name"];
-        break;
-      } else if (types.indexOf("locality") > -1) {
-        name = component["short_name"];
-        break;
+    var results = JSON.parse(xmlHttp.response)["results"];
+    if (results.length > 0) {
+      var address_components = results[0]["address_components"];
+      var name = ""
+      for (var i = 0; i < address_components.length; i++) {
+        var component = address_components[i]
+        var types = component["types"]
+        if (types.indexOf("neighborhood") > -1) {
+          name = component["short_name"];
+          break;
+        } else if (types.indexOf("establishment") > -1) {
+          name = component["short_name"];
+          break;
+        } else if (types.indexOf("locality") > -1) {
+          name = component["short_name"];
+          break;
+        }
       }
+      return name
+    } else {
+      return "over limit";
     }
-    return name
   };
 
   /*
