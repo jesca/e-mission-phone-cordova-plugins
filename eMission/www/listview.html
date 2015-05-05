@@ -28,45 +28,18 @@
        }, false);
     </script>
   </head>
-<body ng-app = "starter" ng-controller="TripsCtrl">
-<ion-nav-view>
-  <ion-content>
-    <ion-list>
-      <div class = "row main">
-        <div class = "col date">
-          {{date}}
-        </div>
-      </div>
+<body ng-app = "starter" ng-controller="TripsCtrl" animation="slide-left-right-ios7">
+  <ion-view>
+    <ion-content>
+    <ion-slide-box>
+      <ion-slide ng-repeat="(key, obj) in data.slides">
+        {{$index}}
+      </ion-slide>
+    </ion-slide-box>
+    <map on-create="mapCreated(map)"></map>
 
-      <ion-item ng-repeat="x in trips" class = "no-margin">
-        <div class="col col-33 col-offset-10">
-          <ul class="img-list">
-              <li>
-                  <div class="location-holder" >
-                      <p>{{getDisplayName(x)}} </p>
-                  </div>
-
-              </li>
-          </ul>
-      </div>
-      <div class = "row" ng-if="notSingleOrLast($index, trips)">
-          <div class="col col-33 col-offset-10">
-              <ul class="img-list">
-                  <li>
-                      <div class="verticalLine"></div>
-                  </li>
-              </ul>
-          </div>
-      </div>
-
-      </ion-item>
-  </ion-list>
-  <ion-content scroll="false">
-   <map on-create="mapCreated(map)"></map>
- </ion-content>
 </ion-content>
-
-     <ion-tabs class="tabs-positive tabs-icon-top">
+       <ion-tabs class="tabs-positive tabs-icon-top">
 
     <ion-tab title="Trips" icon="ion-merge">
     </ion-tab>
@@ -75,7 +48,6 @@
     <ion-tab title="About" icon="ion-compose">
     </ion-tab>
   </ion-tabs>
- </ion-nav-view>
-
+  </ion-view>
 </body>
 </html>
