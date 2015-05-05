@@ -33,11 +33,9 @@ angular.module('starter.controllers', ['ionic'])
               // get all sections for the last five days
               for (var j = 0; j < 5; j++) {
                 var mr_trip = sec.pop();
-                console.log(mr_trip)
                 var mr_trips = [mr_trip];
                 var key_date = getDateOfTrip(mr_trip);
                 var today = new Date(mr_trip.startTime.date);
-                console.log('cur date' + today)
                 for (var i = 0; i < sec.length; i++) {
                   var trip = sec[i];
                   // hacky way to check if date is the same
@@ -47,15 +45,15 @@ angular.module('starter.controllers', ['ionic'])
                     if (tripDate.getDay() == today.getDay()) {
                       if (tripDate.getYear() == today.getYear()) {
                         mr_trips.push(trip);
-                        sec.pop(sec[i]);
+                        sec.pop(i);
                      }
                    }
                  }
                 }
-                dic[key_date] = mr_trips;
+                dic['date_key'] = key_date;
+                dic['trip_val'] = mr_trips;
                 last_five_trips.push(dic);
                 dic={}
-                console.log('adding ' + key_date)
                // last five trips: [ {date: date, trips: [trip1, trip2]} ]
               }
               $scope.data = {};
@@ -63,12 +61,6 @@ angular.module('starter.controllers', ['ionic'])
               $ionicSlideBoxDelegate.update();
 
               $scope.last_five_trips = last_five_trips;
-              console.log('last_five_trips');
-              console.log(last_five_trips);
-              console.log('dic')
-              console.log(dic)
-              //$scope.trips = mr_trips;
-
           });
       });
 

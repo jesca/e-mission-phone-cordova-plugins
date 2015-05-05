@@ -86,10 +86,11 @@ map {
 }
 
 
-
-
+body {
+  cursor: url('http://ionicframework.com/img/finger.png'), auto;
+}
 .slider {
-  height: 100%;
+  height: 60%;
 }
 .slider-slide {
   padding-top: 80px;
