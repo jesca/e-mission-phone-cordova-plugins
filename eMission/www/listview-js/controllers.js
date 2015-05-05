@@ -226,15 +226,44 @@ angular.module('starter.controllers', ['ionic'])
 
     //Change according to datatype in actual data object and the intervals set in the app.
     // Intervals: Green - confidence > 80 ; Yellow: 80 > confidence > 70; Red: 70 > confidence
-    $scope.pickColor = function(item){
+    $scope.getConfidenceColor = function(item){
         if (item.confidence >= 0.9) {
-            return "color : green";
+            return "confidence-certain";
         } else if (item.confidence >= 0.7) {
-            return "color : orange";
+            return "confidence-medium";
         } else {
-            return "color : red";
+            return "confidence-certain";
         }
     };
+
+    $scope.getDisplayMode = function(item) {
+         if (item.predictedMode != null) {
+            var item_mode = item.predictedMode;
+        } else {
+            var item_mode = item.autoMode;
+        }
+              if (item_mode == 'walking') {
+                return 'ion-android-walk'
+              } if (item_mode == 'car') {
+                return 'ion-android-car';
+              } if (item_mode == 'cycling') {
+                    return 'ion-android-bicycle';
+                } if (item_mode == 'air') {
+                    return 'ion-android-plane';
+                } if (item_mode == 'bus') {
+                    return 'ion-android-bus';
+                } if (item_mode == 'train') {
+                    return 'ion-android-subway';
+                }
+        };
+
+  $scope.modes =
+    [{mode:"walking", show: "Walk"},
+    {mode:"cycling", show: "Bike"},
+    {mode:"car", show: "Car"},
+    {mode:"air", show: "Fly"},
+    {mode:"bus", show: "Bus"},
+    {mode:"train", show: "Train"}];
 })
 
 .controller('PlaylistsCtrl', function($scope) {

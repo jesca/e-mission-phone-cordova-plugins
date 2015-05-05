@@ -28,8 +28,8 @@ ul.img-list li {
     width:80px;
     height:80px;
     text-align:center;
-    -webkit-border-radius: 80px;
-    -moz-border-radius: 80px;
+    -webkit-border-radius: 60px;
+    -moz-border-radius: 60px;
  border: 2px solid whitesmoke;
  color:white;
  background:rgb(101, 213, 143);
@@ -43,7 +43,8 @@ padding:0px;
    padding:0px !important;
  }
  .display-name {
-   float:left;
+   text-align:left;
+   margin-top:35px;
  }
 
 .location-holder:hover {
@@ -69,7 +70,7 @@ padding:0px;
 
 .verticalLineMap {
   width:100px;
-  height:50px;
+  height:70px;
 }
 
 map {
@@ -97,6 +98,9 @@ body {
   cursor: url('http://ionicframework.com/img/finger.png'), auto;
   font-family:'Lato';
 
+}
+.small {
+  font-size:7px;
 }
 .bg-color{
   background:#71bc98!important;
@@ -131,4 +135,31 @@ body {
   text-align: left;
   list-style: decimal;
   margin: 10px 0px;
+}
+
+.mode {
+  font-size:30px;
+  padding-top:30px;
+}
+
+.item-select select {
+  padding: 24px 35px 16px 0px;
+
+}
+
+.display-mode {
+  text-align:left;
+}
+
+.confidence-certain {
+  color:#ffffff;
+}
+
+.confidence-medium {
+  color:#fcc280;
+}
+
+.confidence-low {
+  color:#e9584e;
+
 }
