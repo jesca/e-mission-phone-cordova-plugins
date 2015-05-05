@@ -23,7 +23,7 @@ angular.module('starter.controllers', ['ionic'])
     var db = window.sqlitePlugin.openDatabase({name: "TripSections.db", location: 2, createFromLocation: 1});
       tripSectionDbHelper.getJSON(db, function(jsonTripList) {
           $scope.$apply(function () {
-               console.log(jsonTripList);
+               // console.log(jsonTripList);
               //$scope.trips = tripSectionDbHelper.getUncommitedSections(jsonTripList);
 
               var last_five_trips = [];
@@ -32,6 +32,8 @@ angular.module('starter.controllers', ['ionic'])
 
               // get all sections for the last five days
               for (var j = 0; j < 5; j++) {
+                console.log('sec j')
+                console.log(sec)
                 var mr_trip = sec.pop();
                 var mr_trips = [mr_trip];
                 var key_date = getDateOfTrip(mr_trip);
@@ -41,11 +43,13 @@ angular.module('starter.controllers', ['ionic'])
                   // hacky way to check if date is the same
                   var tripDate = new Date(trip.startTime.date)
                   console.log('compare to ' + tripDate)
+                  console.log('trip date is ' + tripDate)
                   if (tripDate.getMonth() == today.getMonth()) {
                     if (tripDate.getDay() == today.getDay()) {
                       if (tripDate.getYear() == today.getYear()) {
                         mr_trips.push(trip);
                         sec.pop(i);
+
                      }
                    }
                  }
@@ -61,6 +65,7 @@ angular.module('starter.controllers', ['ionic'])
               $ionicSlideBoxDelegate.update();
 
               $scope.last_five_trips = last_five_trips;
+              console.log(last_five_trips);
           });
       });
 
