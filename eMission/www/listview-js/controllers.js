@@ -77,8 +77,14 @@ angular.module('starter.controllers', ['ionic'])
       else {
         return true;
       }
-
     };
+
+    $scope.slideHasChanged = function(index) {
+      console.log("slide changed to index: " + index);
+      var trip = $scope.data.slides[index];
+      $scope.setupMap(trip["trip_val"][0]);
+    }
+
     $scope.mapCreated = function(map) {
       console.log("maps here");
       console.log(map)
@@ -220,11 +226,6 @@ angular.module('starter.controllers', ['ionic'])
             return "color : red";
         }
     };
-
-
-
-
-
 })
 
 .controller('PlaylistsCtrl', function($scope) {
