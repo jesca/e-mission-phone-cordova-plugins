@@ -32,31 +32,24 @@ angular.module('starter.controllers', ['ionic'])
 
               // get all sections for the last five days
               for (var j = 0; j < 5; j++) {
-                console.log('length of sec ' + sec.length);
-                console.log('first thing in sec is ' + sec[sec.length-1].startTime.date)
-
                 var mr_trip = sec.pop();
                 var mr_trips = [mr_trip];
                 var today = new Date(mr_trip.startTime.date);
                 var key_date = getDateOfTrip(today);
-                console.log(today);
-                console.log('date key is ' + key_date)
+
                 for (var i = sec.length-1; i >=0;) {
                   var trip = sec[i];
                   // hacky way to check if date is the same
                   var tripDate = new Date(trip.startTime.date)
-                  console.log('trip date is ' + tripDate)
                   if (tripDate.getMonth() == today.getMonth()) {
                     if (tripDate.getDate() == today.getDate()) {
                       if (tripDate.getFullYear() == today.getFullYear()) {
-                        console.log('matched')
                         sec.splice(i,1);
                         mr_trips.unshift(trip);
 
                      }
                    }
                  }
-                 console.log(i);
                  i--;
                 }
                 dic['date_key'] = key_date;
@@ -76,6 +69,13 @@ angular.module('starter.controllers', ['ionic'])
 
     var getDateOfTrip = function(trip_date) {
       return ("" + (trip_date.getUTCMonth()+1) + "/" + trip_date.getDate() + "/" + trip_date.getUTCFullYear());
+    };
+
+    $scope.getTime = function(date){
+      console.log('get time for ' + date);
+      console.log(date.getHours())
+      var min = (date.getMinutes()<10?'0':'') + date.getMinutes();
+      return ("" + date.getHours() + ":" + min);
     }
 
 

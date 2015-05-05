@@ -30,29 +30,37 @@
   </head>
 <body ng-app = "starter" ng-controller="TripsCtrl" animation="slide-left-right-ios7">
   <ion-view>
-        <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="true">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)" show-pager="true" class="bg-color">
        <ion-slide ng-repeat="trip in data.slides">
         <ion-content>
+
          <ion-list>
-          <div class = "row main">
+          <div class = "row main bg-color">
+
             <div class = "col date">
               {{trip.date_key}}
             </div>
           </div>
 
           <ion-item ng-repeat="x in trip.trip_val" class = "no-margin">
-            <div class="col col-33 col-offset-10">
+            <div class = 'row bg-color'>
+            <div class="col col-33 col-offset-33">
               <ul class="img-list">
                   <li>
 
                       <div class="location-holder" ng-click="setupMap(x)">
-                           <p>{{getDisplayName(x)}} </p>
+                           <p>{{getTime(x.startTime.date)}} </p>
                       </div>
                   </li>
               </ul>
           </div>
-          <div class = "row" ng-if="notSingleOrLast($index, trip.trip_val)">
-              <div class="col col-33 col-offset-10">
+          <div class = "col display-name">
+            {{getDisplayName(x)}}
+            
+          </div>
+        </div>
+          <div class = "row bg-color" ng-if="notSingleOrLast($index, trip.trip_val)">
+              <div class="col col-33 col-offset-33">
                   <ul class="img-list">
                       <li>
                           <div class="verticalLine"></div>
@@ -60,7 +68,7 @@
                   </ul>
               </div>
           </div>
-
+</div>
           </ion-item>
 
       </ion-list>
