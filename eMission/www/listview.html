@@ -72,18 +72,15 @@
 
                 </div>
                 <div class="col display-mode">
+                  <i class="icon mode {{getDisplayMode(x)}} {{getConfidenceColor(x)}}" ng-if="x.confidence>=.9"></i>
 
-                  <label class="item-input item-select">
+                  <label class="item-input item-select" ng-if= "x.confidence <.9">
                     <div class="input-label bg-color">
                       <i class="icon mode {{getDisplayMode(x)}} {{getConfidenceColor(x)}}"></i>
                     </div>
-                    <select class="small bg-color display-mode">
-                      <option selected ng-repeat-start="mode in modes" ng-if="mode.mode == x.autoMode">
-                        {{mode.show}}
-                      </option>
-                      <option ng-repeat-end>
-                        {{mode.show}}
-                      </option>
+                    <select class="small bg-color display-mode" ng-model="modeChange" ng-options="mode.mode as mode.show for mode in modes"
+                     ng-init="modeChange=x.autoMode" ng-change="modeUpdate(modes[modeChanged-1])">
+
                     </select>
                   </label>
                 </div>

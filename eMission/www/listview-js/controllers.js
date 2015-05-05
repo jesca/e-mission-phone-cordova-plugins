@@ -315,7 +315,7 @@ angular.module('starter.controllers', ['ionic'])
     } else if (item.confidence >= 0.7) {
       return "confidence-medium";
     } else {
-      return "confidence-certain";
+      return "confidence-low";
     }
   };
 
@@ -364,6 +364,15 @@ angular.module('starter.controllers', ['ionic'])
     mode: "train",
     show: "Train"
   }];
+
+  $scope.modeUpdate = function(newMode) {
+         console.log("selected new mode " + newMode)
+     };
+
+  $scope.modeChange = function(newMode) {
+    $scope.modes[0].newMode;
+  };
+
 })
 
 .controller('PlaylistsCtrl', function($scope) {
