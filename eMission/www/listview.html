@@ -78,7 +78,7 @@
                     <div class="input-label bg-color">
                       <i class="icon mode {{getDisplayMode(x)}} {{getConfidenceColor(x)}}"></i>
                     </div>
-                    <select class="small bg-color display-mode" ng-model="modeChange" ng-options="mode.mode as mode.show for mode in modes" ng-init="modeChange=x.autoMode" ng-change="modeUpdate(x, modes[modeChanged-1])">
+                    <select class="small bg-color display-mode" ng-model="modeChange" ng-options="mode.mode as mode.show for mode in modes" ng-init="modeChange=x.autoMode" ng-change="modeUpdate(x, modeChange)">
 
                     </select>
                   </label>

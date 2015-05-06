@@ -310,7 +310,9 @@ angular.module('starter.controllers', ['ionic'])
     //Change according to datatype in actual data object and the intervals set in the app.
     // Intervals: Green - confidence > 80 ; Yellow: 80 > confidence > 70; Red: 70 > confidence
     $scope.getConfidenceColor = function(item) {
-      if (item.confidence >= 0.9) {
+      if (item.userSelection != null && item.userSelection.length > 0) {
+        return "confidence-certain";
+      } else if (item.confidence >= 0.9) {
         return "confidence-certain";
       } else if (item.confidence >= 0.7) {
         return "confidence-medium";
@@ -320,10 +322,13 @@ angular.module('starter.controllers', ['ionic'])
     };
 
     $scope.getDisplayMode = function(item) {
-      if (item.predictedMode != null) {
-        var item_mode = item.predictedMode;
+      var item_mode = "";
+      if (item.userSelection != null && item.userSelection.length > 0) {
+        item_mode = item.userSelection;
+      } else if (item.predictedMode != null) {
+        item_mode = item.predictedMode;
       } else {
-        var item_mode = item.autoMode;
+        item_mode = item.autoMode;
       }
       if (item_mode == 'walking') {
         return 'ion-android-walk'
@@ -366,7 +371,20 @@ angular.module('starter.controllers', ['ionic'])
     }];
 
     $scope.modeUpdate = function(trip, newMode) {
-      console.log("selected new mode " + newMode)
+      console.log("selected new mode " + newMode + " with tripId " + trip.tripId)
+        // var db = window.sqlitePlugin.openDatabase({
+        //   name: "TripSections.db",
+        //   location: 2,
+        //   createFromLocation: 1
+        // });
+        // db.transaction(function(tx) {
+        //   var mDate = new Date();
+        //   tx.executeSql("UPDATE currTrips SET userSelection = ? WHERE tripId = ?", [newMode, trip.tripId], function(tx, r) {
+        //     console.log("Your SQLite query was successful!");
+        //   }, function(tx, e) {
+        //     console.log("SQLite Error: " + e.message);
+        //   });
+        // });
     };
 
     $scope.modeChange = function(newMode) {
