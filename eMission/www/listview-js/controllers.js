@@ -310,7 +310,7 @@ angular.module('starter.controllers', ['ionic'])
     //Change according to datatype in actual data object and the intervals set in the app.
     // Intervals: Green - confidence > 80 ; Yellow: 80 > confidence > 70; Red: 70 > confidence
     $scope.getConfidenceColor = function(item) {
-      if (item.userSelection != null && item.userSelection.length > 0) {
+      if (item.userClassification != null && item.userClassification.length > 0) {
         return "confidence-certain";
       } else if (item.confidence >= 0.9) {
         return "confidence-certain";
@@ -323,8 +323,8 @@ angular.module('starter.controllers', ['ionic'])
 
     $scope.getDisplayMode = function(item) {
       var item_mode = "";
-      if (item.userSelection != null && item.userSelection.length > 0) {
-        item_mode = item.userSelection;
+      if (item.userClassification != null && item.userClassification.length > 0) {
+        item_mode = item.userClassification;
       } else if (item.predictedMode != null) {
         item_mode = item.predictedMode;
       } else {
@@ -372,19 +372,19 @@ angular.module('starter.controllers', ['ionic'])
 
     $scope.modeUpdate = function(trip, newMode) {
       console.log("selected new mode " + newMode + " with tripId " + trip.tripId)
-        // var db = window.sqlitePlugin.openDatabase({
-        //   name: "TripSections.db",
-        //   location: 2,
-        //   createFromLocation: 1
-        // });
-        // db.transaction(function(tx) {
-        //   var mDate = new Date();
-        //   tx.executeSql("UPDATE currTrips SET userSelection = ? WHERE tripId = ?", [newMode, trip.tripId], function(tx, r) {
-        //     console.log("Your SQLite query was successful!");
-        //   }, function(tx, e) {
-        //     console.log("SQLite Error: " + e.message);
-        //   });
-        // });
+      var db = window.sqlitePlugin.openDatabase({
+        name: "TripSections.db",
+        location: 2,
+        createFromLocation: 1
+      });
+      db.transaction(function(tx) {
+        var mDate = new Date();
+        tx.executeSql("UPDATE currTrips SET userClassification = ? WHERE tripId = ?", [newMode, trip.tripId], function(tx, r) {
+          console.log("Your SQLite query was successful!");
+        }, function(tx, e) {
+          console.log("SQLite Error: " + e.message);
+        });
+      });
     };
 
     $scope.modeChange = function(newMode) {
