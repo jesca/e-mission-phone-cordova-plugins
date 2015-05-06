@@ -365,7 +365,7 @@ angular.module('starter.controllers', ['ionic'])
       show: "Train"
     }];
 
-    $scope.modeUpdate = function(newMode) {
+    $scope.modeUpdate = function(trip, newMode) {
       console.log("selected new mode " + newMode)
     };
 
