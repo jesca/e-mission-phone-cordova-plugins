@@ -214,17 +214,6 @@ angular.module('starter.controllers', ['ionic'])
       xmlHttp.open("GET", url);
       xmlHttp.onload = responseListener;
       xmlHttp.send();
-      // var address = JSON.parse(xmlHttp.response)["address"]
-      // if (address["road"]) {
-      //   return address["road"];
-      // } else if (address["suburb"]) {
-      //   return address["suburb"];
-      // } else if (address["hamlet"]) {
-      //   return address["hamlet"];
-      // } else if (address["city"]) {
-      //   return address["city"];
-      // }
-      // return "";
     };
 
     /*
